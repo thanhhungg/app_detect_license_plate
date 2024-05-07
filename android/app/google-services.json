@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "885853685428",
+    "project_id": "btl-android-90ac3",
+    "storage_bucket": "btl-android-90ac3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885853685428:android:dcbf944eccfb5e6b8af9e1",
+        "android_client_info": {
+          "package_name": "com.example.detect_license_plate_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4tj7QXNZ7--Voa_wOwt4iJ47F2iRlupg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
