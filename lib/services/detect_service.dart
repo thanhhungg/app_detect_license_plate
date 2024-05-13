@@ -9,6 +9,8 @@ import 'base_api.dart';
 abstract class DetectService {
   Future<List<LicensePlateResult>> detectVideo(
       File videoFile, String nameModel);
+  Future<List<LicensePlateResult>> detectImage(
+      File videoFile, String nameModel);
   Future<List<ModelResultDto>> getModels();
 }
 
@@ -24,6 +26,35 @@ class DetectServiceImpl extends BaseApi implements DetectService {
       // Gửi POST request với FormData
       final response = await dio.post(
         'detect/video?nameModel=$nameModel',
+        data: formData,
+      );
+
+      // Xử lý response và trả về kết quả
+      if (response.statusCode == 200) {
+        List<dynamic> results = response.data['data'];
+        return results
+            .map((result) => LicensePlateResult.fromJson(result))
+            .toList();
+      } else {
+        throw Exception(
+            'Failed to detect license plate. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Failed to detect license plate. Error: $e');
+    }
+  }
+
+  @override
+  Future<List<LicensePlateResult>> detectImage(
+      File imageFile, String nameModel) async {
+    try {
+      FormData formData = FormData.fromMap({
+        'imageUpload': await MultipartFile.fromFile(imageFile.path),
+      });
+
+      // Gửi POST request với FormData
+      final response = await dio.post(
+        'detect/image?nameModel=$nameModel',
         data: formData,
       );
 

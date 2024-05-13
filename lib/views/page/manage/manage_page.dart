@@ -32,30 +32,33 @@ class _ManagePageState extends State<ManagePage> {
     return BlocProvider.value(
       value: manageCubit,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColors.blueMain,
-          automaticallyImplyLeading: false,
-          title: const Text(
-            'Manage',
-            style: TextStyle(color: AppColors.white),
+        backgroundColor: AppColors.gray49E,
+        floatingActionButton: FloatingActionButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(100),
           ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ManageCreatePage()));
-                },
-                icon: const Icon(
-                  Icons.add_circle_outline_sharp,
-                  color: AppColors.white,
-                ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ManageCreatePage(),
               ),
-            ),
-          ],
+            );
+          },
+          child: const Icon(Icons.add, color: AppColors.white),
+          backgroundColor: AppColors.blueMain,
+        ),
+        appBar: AppBar(
+          centerTitle: true,
+          iconTheme: const IconThemeData(color: AppColors.white),
+          backgroundColor: AppColors.blueMain,
+          title: const Text(
+            'Manage Page',
+            style: TextStyle(
+                color: AppColors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold),
+          ),
         ),
         body: BlocBuilder<ManageCubit, ManageState>(
           builder: (context, state) {
@@ -77,7 +80,7 @@ class _ManagePageState extends State<ManagePage> {
                                     children: [
                                       Container(
                                         decoration: BoxDecoration(
-                                          color: AppColors.gray49E,
+                                          color: AppColors.white,
                                           borderRadius:
                                               BorderRadius.circular(10),
                                         ),
@@ -157,77 +160,81 @@ class _ManagePageState extends State<ManagePage> {
                                                         .length,
                                                     itemBuilder:
                                                         (context, subIndex) {
-                                                      return Container(
-                                                        width: 100,
-                                                        height: 50,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          border: Border.all(
-                                                              color: AppColors
-                                                                  .black2),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                        ),
-                                                        child: Column(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Text(
-                                                                  "xMin: ${data[index].licensePlate![subIndex].xMin.toString()}",
-                                                                  style: const TextStyle(
-                                                                      color: AppColors
-                                                                          .lightGray900,
-                                                                      fontSize:
-                                                                          12),
-                                                                ),
-                                                                AppConstants
-                                                                    .kSpacingItemW8,
-                                                                Text(
-                                                                  "yMin: ${data[index].licensePlate![subIndex].yMin.toString()}",
-                                                                  style: const TextStyle(
-                                                                      color: AppColors
-                                                                          .lightGray900,
-                                                                      fontSize:
-                                                                          12),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Text(
-                                                                  "xMax: ${data[index].licensePlate![subIndex].xMax.toString()}",
-                                                                  style: const TextStyle(
-                                                                      color: AppColors
-                                                                          .lightGray900,
-                                                                      fontSize:
-                                                                          12),
-                                                                ),
-                                                                AppConstants
-                                                                    .kSpacingItemW8,
-                                                                Text(
-                                                                  "yMax: ${data[index].licensePlate![subIndex].yMax.toString()}",
-                                                                  style: const TextStyle(
-                                                                      color: AppColors
-                                                                          .lightGray900,
-                                                                      fontSize:
-                                                                          12),
-                                                                ),
-                                                              ],
-                                                            )
-                                                          ],
+                                                      return InkWell(
+                                                        onTap: () {},
+                                                        child: Container(
+                                                          width: 100,
+                                                          height: 50,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                                color: AppColors
+                                                                    .black2),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                          ),
+                                                          child: Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .center,
+                                                            children: [
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Text(
+                                                                    "xMin: ${data[index].licensePlate![subIndex].xMin.toString()}",
+                                                                    style: const TextStyle(
+                                                                        color: AppColors
+                                                                            .lightGray900,
+                                                                        fontSize:
+                                                                            12),
+                                                                  ),
+                                                                  AppConstants
+                                                                      .kSpacingItemW8,
+                                                                  Text(
+                                                                    "yMin: ${data[index].licensePlate![subIndex].yMin.toString()}",
+                                                                    style: const TextStyle(
+                                                                        color: AppColors
+                                                                            .lightGray900,
+                                                                        fontSize:
+                                                                            12),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                              Row(
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                children: [
+                                                                  Text(
+                                                                    "xMax: ${data[index].licensePlate![subIndex].xMax.toString()}",
+                                                                    style: const TextStyle(
+                                                                        color: AppColors
+                                                                            .lightGray900,
+                                                                        fontSize:
+                                                                            12),
+                                                                  ),
+                                                                  AppConstants
+                                                                      .kSpacingItemW8,
+                                                                  Text(
+                                                                    "yMax: ${data[index].licensePlate![subIndex].yMax.toString()}",
+                                                                    style: const TextStyle(
+                                                                        color: AppColors
+                                                                            .lightGray900,
+                                                                        fontSize:
+                                                                            12),
+                                                                  ),
+                                                                ],
+                                                              )
+                                                            ],
+                                                          ),
                                                         ),
                                                       );
                                                     }),

@@ -20,6 +20,7 @@ class _ResultTrainPageState extends State<ResultTrainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         iconTheme: const IconThemeData(color: AppColors.white),
         backgroundColor: AppColors.blueMain,
         title: const Text(
@@ -27,61 +28,91 @@ class _ResultTrainPageState extends State<ResultTrainPage> {
           style: TextStyle(color: AppColors.white),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          AppConstants.kSpacingItem24,
-          const Text(
-            'Result Train',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          AppConstants.kSpacingItem24,
-          Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: widget.data.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    title: Text(widget.data[index].name.toString()),
-                    subtitle: Column(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: widget.data.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: Column(
                       children: [
-                        Text(
-                          widget.data[index].acc.toString(),
-                        ),
-                        Text(
-                          widget.data[index].pre.toString(),
-                        ),
-                        Text(
-                          widget.data[index].recall.toString(),
+                        ListTile(
+                          title: Row(
+                            children: [
+                              const Text(
+                                "Tên model: ",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              Text(widget.data[index].name.toString()),
+                            ],
+                          ),
+                          subtitle: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  const Text(
+                                    "Acc: ",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    widget.data[index].acc.toString(),
+                                    style: TextStyle(
+                                        color: widget.data[index].acc! > 0.8
+                                            ? Colors.green
+                                            : Colors.red),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  const Text(
+                                    "Pre: ",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    widget.data[index].pre.toString(),
+                                    style: TextStyle(
+                                        color: widget.data[index].pre! > 0.8
+                                            ? Colors.green
+                                            : Colors.red),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  const Text(
+                                    "F1Score: ",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    widget.data[index].f1score.toString(),
+                                    style: TextStyle(
+                                        color: widget.data[index].f1score! > 0.8
+                                            ? Colors.green
+                                            : Colors.red),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                );
-              },
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CommonButton(
-                minWidth: MediaQuery.of(context).size.width * 0.8,
-                btnText: "Train Page",
-                onPress: () {
-                  Navigator.pop(context);
+                  );
                 },
-                sizeType: SizeType.large,
-                backgroundColor: AppColors.blueMain,
-                btnTextColorEnable: AppColors.white,
               ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }

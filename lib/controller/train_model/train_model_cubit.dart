@@ -20,4 +20,24 @@ class TrainModelCubit extends Cubit<TrainModelState> {
       emit(TrainModelState.error(e));
     }
   }
+
+  Future getAllModel() async {
+    emit(const TrainModelState.loading());
+    try {
+      final data = await trainModelService.getAllModel();
+      emit(TrainModelState.success(data));
+    } catch (e) {
+      emit(TrainModelState.error(e));
+    }
+  }
+
+  Future deleteModel(int id) async {
+    emit(const TrainModelState.loading());
+    try {
+      final data = await trainModelService.deleteModel(id);
+      emit(TrainModelState.success(data));
+    } catch (e) {
+      emit(TrainModelState.error(e));
+    }
+  }
 }

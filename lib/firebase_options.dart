@@ -47,6 +47,7 @@ class DefaultFirebaseOptions {
     projectId: 'btl-android-90ac3',
     authDomain: 'btl-android-90ac3.firebaseapp.com',
     storageBucket: 'btl-android-90ac3.appspot.com',
+    measurementId: 'G-66WY3LQRV5',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
@@ -63,6 +64,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '885853685428',
     projectId: 'btl-android-90ac3',
     storageBucket: 'btl-android-90ac3.appspot.com',
+    androidClientId: '885853685428-096fev1comr6p8v19oqgjofitunctbsb.apps.googleusercontent.com',
+    iosClientId: '885853685428-vckesg25s1h313hg1n473no9a8s285oq.apps.googleusercontent.com',
     iosBundleId: 'com.example.detectLicensePlateApp',
   );
 
@@ -72,6 +75,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '885853685428',
     projectId: 'btl-android-90ac3',
     storageBucket: 'btl-android-90ac3.appspot.com',
+    androidClientId: '885853685428-096fev1comr6p8v19oqgjofitunctbsb.apps.googleusercontent.com',
+    iosClientId: '885853685428-vckesg25s1h313hg1n473no9a8s285oq.apps.googleusercontent.com',
     iosBundleId: 'com.example.detectLicensePlateApp',
   );
 
@@ -82,5 +87,6 @@ class DefaultFirebaseOptions {
     projectId: 'btl-android-90ac3',
     authDomain: 'btl-android-90ac3.firebaseapp.com',
     storageBucket: 'btl-android-90ac3.appspot.com',
+    measurementId: 'G-QP5EYF46QN',
   );
 }

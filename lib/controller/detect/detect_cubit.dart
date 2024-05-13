@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:camera/camera.dart';
 import 'package:detect_license_plate_app/services/detect_service.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:get_it/get_it.dart';
@@ -21,6 +22,17 @@ class DetectCubit extends Cubit<DetectState> {
     try {
       final data =
           await detectServiceImpl.detectVideo(videoFile, selectedValue);
+      emit(DetectState.success(data));
+    } catch (e) {
+      emit(DetectState.error(e));
+    }
+  }
+
+  Future<void> detectImage(File imageFile, String selectedValue) async {
+    emit(const DetectState.loading());
+    try {
+      final data =
+          await detectServiceImpl.detectImage(imageFile, selectedValue);
       emit(DetectState.success(data));
     } catch (e) {
       emit(DetectState.error(e));

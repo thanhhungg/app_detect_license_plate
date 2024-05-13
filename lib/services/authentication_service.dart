@@ -29,9 +29,10 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       print('UserCredential: ${userCredential.user?.displayName}');
       //Get IdToken from Firebase and push to BE by api Login
       User? user = FirebaseAuth.instance.currentUser;
-      String? token = await user?.getIdToken(true);
+      // String? token = await user?.getIdToken(true);
       if (user != null) {
         GetIt.instance.get<LocalService>().setUser(user.displayName.toString());
+        GetIt.instance.get<LocalService>().setAvatar(user.photoURL.toString());
       }
       return userCredential;
     } catch (e) {

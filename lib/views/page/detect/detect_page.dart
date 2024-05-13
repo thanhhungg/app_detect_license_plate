@@ -101,11 +101,16 @@ class _DetectPageState extends State<DetectPage> {
         },
         child: Scaffold(
           appBar: AppBar(
+            centerTitle: true,
             backgroundColor: AppColors.blueMain,
             automaticallyImplyLeading: false,
             title: const Text(
               'Detect',
-              style: TextStyle(color: AppColors.white),
+              style: TextStyle(
+                color: AppColors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           body: Column(
@@ -130,7 +135,7 @@ class _DetectPageState extends State<DetectPage> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(20.0),
                 child: ValueListenableBuilder(
                   valueListenable: isImageSelected,
                   builder: (context, value, child) {
@@ -145,6 +150,9 @@ class _DetectPageState extends State<DetectPage> {
                                 decoration: BoxDecoration(
                                   color: AppColors.gray49E,
                                   borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                    color: AppColors.blueMain,
+                                  ),
                                 ),
                                 child: const Center(
                                   child: Icon(
@@ -201,9 +209,9 @@ class _DetectPageState extends State<DetectPage> {
                   },
                 ),
               ),
-              const Spacer(),
+              AppConstants.kSpacingItem16,
               CommonButton(
-                minWidth: MediaQuery.of(context).size.width * 0.8,
+                minWidth: MediaQuery.of(context).size.width * 0.5,
                 btnText: "Detect",
                 onPress: () {
                   if (pickedFiles.path == 'path') {
@@ -221,7 +229,6 @@ class _DetectPageState extends State<DetectPage> {
                 backgroundColor: AppColors.blueMain,
                 btnTextColorEnable: AppColors.white,
               ),
-              AppConstants.kSpacingItem16,
             ],
           ),
         ),

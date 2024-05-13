@@ -1,7 +1,7 @@
 class LicensePlateResult {
   String? label;
   double? confidence;
-  double? timestamp;
+  String? timestamp;
   String? frame;
 
   LicensePlateResult({this.label, this.confidence, this.timestamp, this.frame});

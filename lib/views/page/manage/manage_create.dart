@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'dart:io';
 import 'package:detect_license_plate_app/config/constants/app_constants.dart';
 import 'package:detect_license_plate_app/controller/manage/manage_cubit.dart';
+import 'package:detect_license_plate_app/models/sample_dto.dart';
 import 'package:detect_license_plate_app/views/common/common_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -17,7 +18,9 @@ import '../../../config/constants/app_colors.dart';
 import '../main_page.dart';
 
 class ManageCreatePage extends StatefulWidget {
-  const ManageCreatePage({super.key});
+  const ManageCreatePage({
+    super.key,
+  });
 
   @override
   State<ManageCreatePage> createState() => _ManageCreatePageState();
@@ -68,6 +71,7 @@ class _ManageCreatePageState extends State<ManageCreatePage> {
         child: Scaffold(
           resizeToAvoidBottomInset: true,
           appBar: AppBar(
+            centerTitle: true,
             iconTheme: const IconThemeData(color: AppColors.white),
             backgroundColor: AppColors.blueMain,
             title: const Text(

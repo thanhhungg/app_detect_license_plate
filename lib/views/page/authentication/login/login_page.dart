@@ -1,8 +1,6 @@
 import 'package:detect_license_plate_app/controller/authentication/authentication_cubit.dart';
 import 'package:detect_license_plate_app/views/page/authentication/login/signIn_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -171,6 +169,10 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        TextButton(
+                          onPressed: () => throw Exception(),
+                          child: const Text("Throw Test Exception"),
+                        ),
                         TextButton(
                           onPressed: () {
                             Navigator.push(

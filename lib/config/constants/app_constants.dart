@@ -42,6 +42,9 @@ class AppConstants {
   static SizedBox kSpacingItemW8 = SizedBox(width: 8.w);
   static SizedBox kSpacingItemW16 = SizedBox(width: 16.w);
   static SizedBox kSpacingItemW24 = SizedBox(width: 24.w);
+  static SizedBox kSpacingItemW32 = SizedBox(width: 32.w);
+  static SizedBox kSpacingItemW64 = SizedBox(width: 64.w);
+
   static int badRequestStatus = 400;
   static const String privacyURL = 'https://sotalabs.io/shotx/privacy.html';
   static const String termUrl = 'https://sotalabs.io/shotx/tos.html';

@@ -84,13 +84,17 @@ class _TrainPageState extends State<TrainPage> {
               error: (error) {});
         },
         child: Scaffold(
+          backgroundColor: AppColors.gray49E,
           appBar: AppBar(
+            centerTitle: true,
             backgroundColor: AppColors.blueMain,
             automaticallyImplyLeading: false,
             title: const Text(
               'Train Model',
               style: TextStyle(
-                  color: AppColors.white, fontWeight: FontWeight.bold),
+                  color: AppColors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20),
             ),
           ),
           body: BlocBuilder<ManageCubit, ManageState>(
@@ -115,7 +119,7 @@ class _TrainPageState extends State<TrainPage> {
                                   children: [
                                     Container(
                                       decoration: BoxDecoration(
-                                        color: AppColors.gray49E,
+                                        color: AppColors.white,
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: Column(
@@ -293,7 +297,7 @@ class _TrainPageState extends State<TrainPage> {
                             ),
                           ),
                           CommonButton(
-                            minWidth: MediaQuery.of(context).size.width * 0.8,
+                            minWidth: MediaQuery.of(context).size.width * 0.5,
                             btnText: "Training model",
                             onPress: () {
                               trainModelCubit.trainModel(choose.value);
@@ -302,6 +306,7 @@ class _TrainPageState extends State<TrainPage> {
                             backgroundColor: AppColors.blueMain,
                             btnTextColorEnable: AppColors.white,
                           ),
+                          AppConstants.kSpacingItem32,
                         ],
                       ),
                     );
