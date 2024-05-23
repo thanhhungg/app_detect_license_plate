@@ -34,12 +34,14 @@ class ManageCubit extends Cubit<ManageState> {
   }
 
   Future manageCreate(
+    String label,
     File imageFile,
     List<Map<String, double>> coordinates,
   ) async {
     emit(const ManageState.loading());
     try {
-      final data = await manageService.manageCreate(imageFile, coordinates);
+      final data =
+          await manageService.manageCreate(label, imageFile, coordinates);
       emit(ManageState.success(data));
     } catch (e) {
       emit(ManageState.error(e));

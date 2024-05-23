@@ -12,8 +12,8 @@ import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../config/constants/app_colors.dart';
+import '../../../models/model_result_dto.dart';
 
 class DetectPage extends StatefulWidget {
   const DetectPage({super.key});
@@ -28,8 +28,8 @@ class _DetectPageState extends State<DetectPage> {
   ValueNotifier<bool> isImageSelected = ValueNotifier(false);
   late VideoPlayerController _controller;
   late DetectCubit detectCubit;
-  final List<String> models = [];
-  String? selectedValue = './ai_model/best.pt';
+  late List<ModelResultDto> models = [];
+  late ModelResultDto selectedValue = ModelResultDto(name: 'Select model');
   @override
   void initState() {
     _controller = VideoPlayerController.file(File(pickedFiles.path))
@@ -89,11 +89,9 @@ class _DetectPageState extends State<DetectPage> {
               );
             },
             successModel: (data) {
-              for (int i = 0; i < data.length; i++) {
-                models.add(data[i].name.toString());
-              }
+              models.addAll(data);
               setState(() {
-                selectedValue = data[0].name;
+                selectedValue = findModelWithMaxAccuracy(models);
               });
             },
             error: (e) {},
@@ -123,7 +121,7 @@ class _DetectPageState extends State<DetectPage> {
                 children: [
                   const Text(
                     'Select model',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
@@ -222,7 +220,7 @@ class _DetectPageState extends State<DetectPage> {
                     );
                   } else {
                     detectCubit.detectVideo(
-                        File(pickedFiles.path), selectedValue!);
+                        File(pickedFiles.path), selectedValue.name.toString());
                   }
                 },
                 sizeType: SizeType.large,
@@ -239,7 +237,7 @@ class _DetectPageState extends State<DetectPage> {
   Center dropDownButtonCustom() {
     return Center(
       child: DropdownButtonHideUnderline(
-        child: DropdownButton2<String>(
+        child: DropdownButton2<ModelResultDto>(
           isExpanded: true,
           hint: const Row(
             children: [
@@ -265,23 +263,38 @@ class _DetectPageState extends State<DetectPage> {
             ],
           ),
           items: models
-              .map((String item) => DropdownMenuItem<String>(
+              .map((ModelResultDto item) => DropdownMenuItem<ModelResultDto>(
                     value: item,
-                    child: Text(
-                      item,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                      overflow: TextOverflow.ellipsis,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          item.name.toString(),
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        Text(
+                          'Acc: ${item.acc}',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: item.acc!.toInt() < 50
+                                ? Colors.red
+                                : Colors.green,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
                     ),
                   ))
               .toList(),
           value: selectedValue,
-          onChanged: (String? value) {
+          onChanged: (ModelResultDto? value) {
             setState(() {
-              selectedValue = value;
+              selectedValue = value!;
             });
           },
           buttonStyleData: ButtonStyleData(
@@ -338,5 +351,19 @@ class _DetectPageState extends State<DetectPage> {
         });
       isImageSelected.value = !isImageSelected.value;
     }
+  }
+
+  ModelResultDto findModelWithMaxAccuracy(List<ModelResultDto> models) {
+    ModelResultDto? maxModel;
+    double? maxAccuracy = double.negativeInfinity;
+
+    for (var model in models) {
+      if (model.acc! > maxAccuracy!) {
+        maxAccuracy = model.acc;
+        maxModel = model;
+      }
+    }
+
+    return maxModel!;
   }
 }

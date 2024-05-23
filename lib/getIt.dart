@@ -7,24 +7,25 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'config/constants/app_string.dart';
 import 'firebase_options.dart';
 import 'local_service.dart';
 import 'services/authentication_service.dart';
 
 final g = GetIt.I;
-const baseUrl = 'http://10.0.2.2:8000/';
+
 Future initializeDependencies() async {
-  Dio dio = Dio(BaseOptions(baseUrl: baseUrl));
+  Dio dio = Dio(BaseOptions(baseUrl: AppString.baseUrl));
   dio.interceptors.add(LogInterceptor(requestBody: true, responseBody: true));
 
   MobileAds.instance.initialize();
-  g.registerLazySingleton(() => dio, instanceName: baseUrl);
-  GetIt.instance.registerSingleton(DetectServiceImpl());
-  GetIt.instance.registerSingleton(ManageServiceImpl());
-  GetIt.instance.registerSingleton(AuthenticationRepositoryImpl());
+  g.registerLazySingleton(() => dio, instanceName: AppString.baseUrl);
+  g.registerSingleton(DetectServiceImpl());
+  g.registerSingleton(ManageServiceImpl());
+  g.registerSingleton(AuthenticationRepositoryImpl());
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  GetIt.instance.registerSingleton(await SharedPreferences.getInstance());
-  GetIt.instance.registerSingleton(LocalService());
-  GetIt.instance.registerSingleton(TrainModelServiceImpl());
+  g.registerSingleton(await SharedPreferences.getInstance());
+  g.registerSingleton(LocalService());
+  g.registerSingleton(TrainModelServiceImpl());
   await FirebaseService.initNotifications();
 }

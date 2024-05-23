@@ -25,90 +25,81 @@ class _ResultTrainPageState extends State<ResultTrainPage> {
         backgroundColor: AppColors.blueMain,
         title: const Text(
           'Result Train',
-          style: TextStyle(color: AppColors.white),
+          style: TextStyle(
+            color: AppColors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: widget.data.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    child: Column(
+            Card(
+              child: Column(
+                children: [
+                  ListTile(
+                    title: Row(
                       children: [
-                        ListTile(
-                          title: Row(
-                            children: [
-                              const Text(
-                                "Tên model: ",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                              Text(widget.data[index].name.toString()),
-                            ],
-                          ),
-                          subtitle: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  const Text(
-                                    "Acc: ",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    widget.data[index].acc.toString(),
-                                    style: TextStyle(
-                                        color: widget.data[index].acc! > 0.8
-                                            ? Colors.green
-                                            : Colors.red),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  const Text(
-                                    "Pre: ",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    widget.data[index].pre.toString(),
-                                    style: TextStyle(
-                                        color: widget.data[index].pre! > 0.8
-                                            ? Colors.green
-                                            : Colors.red),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  const Text(
-                                    "F1Score: ",
-                                    style:
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    widget.data[index].f1score.toString(),
-                                    style: TextStyle(
-                                        color: widget.data[index].f1score! > 0.8
-                                            ? Colors.green
-                                            : Colors.red),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                        const Text(
+                          "Tên model: ",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(widget.data.last.name.toString()),
+                      ],
+                    ),
+                    subtitle: Column(
+                      children: [
+                        Row(
+                          children: [
+                            const Text(
+                              "Acc: ",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              widget.data.last.acc.toString(),
+                              style: TextStyle(
+                                  color: widget.data.last.acc! > 0.8
+                                      ? Colors.green
+                                      : Colors.red),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Text(
+                              "Pre: ",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              widget.data.last.pre.toString(),
+                              style: TextStyle(
+                                  color: widget.data.last.pre! > 0.8
+                                      ? Colors.green
+                                      : Colors.red),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Text(
+                              "F1Score: ",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              widget.data.last.f1score.toString(),
+                              style: TextStyle(
+                                  color: widget.data.last.f1score! > 0.8
+                                      ? Colors.green
+                                      : Colors.red),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  );
-                },
+                  ),
+                ],
               ),
             ),
           ],

@@ -195,10 +195,11 @@ class _ManageCreatePageState extends State<ManageCreatePage> {
                       coordinates.add(tmp);
                       tmp = {};
                     }
-                    manageCubit.manageCreate(
-                      File(pickedFiles.path),
-                      coordinates,
-                    );
+                    print(coordinates);
+                    // manageCubit.manageCreate(
+                    //   File(pickedFiles.path),
+                    //   coordinates,
+                    // );
                   },
                   sizeType: SizeType.large,
                   backgroundColor: AppColors.blueMain,

@@ -2,10 +2,12 @@ import 'dart:ui';
 
 import 'package:detect_license_plate_app/config/constants/app_colors.dart';
 import 'package:detect_license_plate_app/config/constants/app_constants.dart';
+import 'package:detect_license_plate_app/views/common/common_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../../ab_mob_help.dart';
+import 'my_paint.dart';
 import 'manage_model.dart';
 import 'manage_page.dart';
 

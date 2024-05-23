@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalService {
+  final String kKeyAuth = 'key_auth';
   final String kKeyUser = 'key_user';
   final String kKeyFCMToken = 'key_fcm_token';
   final String kKeyAvatar = 'key_avatar';
@@ -32,5 +33,17 @@ class LocalService {
 
   Future setFcmToken(String token) {
     return sharedPreferences.setString(kKeyFCMToken, token);
+  }
+
+  bool? getKeyAuth() {
+    return sharedPreferences.getBool(kKeyAuth);
+  }
+
+  Future setKeyAuth(bool check) {
+    return sharedPreferences.setBool(kKeyAuth, check);
+  }
+
+  Future removeKeyAuth() {
+    return sharedPreferences.remove(kKeyAuth);
   }
 }

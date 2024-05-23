@@ -185,6 +185,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           onPressed: () {
                             _authenticationCubit.logout();
+                            GetIt.instance
+                                .get<LocalService>()
+                                .setKeyAuth(false);
                           },
                           child: const Row(
                             children: [

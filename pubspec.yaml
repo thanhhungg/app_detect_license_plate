@@ -68,6 +68,7 @@ dependencies:
   saver_gallery: ^3.0.5
   device_info_plus: ^10.1.0
   permission_handler: ^11.3.1
+  collection: ^1.18.0
 
 dev_dependencies:
   flutter_test:

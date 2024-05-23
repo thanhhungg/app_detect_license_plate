@@ -11,7 +11,7 @@ class TrainModelCubit extends Cubit<TrainModelState> {
   TrainModelCubit() : super(const TrainModelState.initial());
   TrainModelServiceImpl trainModelService =
       GetIt.instance.get<TrainModelServiceImpl>();
-  Future<void> trainModel(List<String> imageNames) async {
+  Future<void> trainModel(List<int> imageNames) async {
     emit(const TrainModelState.loading());
     try {
       final data = await trainModelService.trainModel(imageNames);

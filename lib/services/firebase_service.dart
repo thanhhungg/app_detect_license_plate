@@ -22,5 +22,8 @@ class FirebaseService {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       print('A new onMessageOpenedApp event was published!');
     });
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('A new onMessage event was published!');
+    });
   }
 }

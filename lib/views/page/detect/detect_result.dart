@@ -52,51 +52,76 @@ class _ResultDetectPageState extends State<ResultDetectPage> {
               shrinkWrap: true,
               itemCount: widget.data.length,
               itemBuilder: (context, index) {
-                return Card(
-                  child: ListTile(
-                    leading: SizedBox(
-                      child: Image.network(
-                        widget.data[index].frame.toString(),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    title: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            const Text(
-                              'License Plate:',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
-                                  color: AppColors.blueMain),
+                return InkWell(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          contentPadding: EdgeInsets.zero,
+                          content: SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.5,
+                            child: InteractiveViewer(
+                              panEnabled: true, // Cho phép kéo
+
+                              maxScale: 3, // Tỷ lệ phóng to tối đa
+                              child: Image.network(
+                                widget.data[index].frame.toString(),
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                            const Spacer(),
-                            IconButton(
-                                padding: EdgeInsets.zero,
-                                onPressed: () async {
-                                  saveGif(widget.data[index].frame.toString());
-                                },
-                                icon: const Icon(Icons.save_alt_outlined)),
-                          ],
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  child: Card(
+                    child: ListTile(
+                      leading: SizedBox(
+                        child: Image.network(
+                          widget.data[index].frame.toString(),
+                          fit: BoxFit.fill,
                         ),
-                        Text(
-                          widget.data[index].label.toString(),
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: AppColors.blueMain),
-                        ),
-                      ],
-                    ),
-                    subtitle: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Confidence: ${widget.data[index].confidence}'),
-                        Text('Timestamp: ${widget.data[index].timestamp}')
-                      ],
+                      ),
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              const Text(
+                                'License Plate:',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                    color: AppColors.blueMain),
+                              ),
+                              const Spacer(),
+                              IconButton(
+                                  padding: EdgeInsets.zero,
+                                  onPressed: () async {
+                                    saveGif(
+                                        widget.data[index].frame.toString());
+                                  },
+                                  icon: const Icon(Icons.save_alt_outlined)),
+                            ],
+                          ),
+                          Text(
+                            widget.data[index].label.toString(),
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: AppColors.blueMain),
+                          ),
+                        ],
+                      ),
+                      subtitle: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Confidence: ${widget.data[index].confidence}'),
+                          Text('Timestamp: ${widget.data[index].timestamp}')
+                        ],
+                      ),
                     ),
                   ),
                 );

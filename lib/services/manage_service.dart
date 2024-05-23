@@ -8,6 +8,7 @@ import '../models/sample_dto.dart';
 abstract class ManageService {
   Future<List<SampleDto>> manageDelete(int id);
   Future<List<SampleDto>> manageCreate(
+      String label,
     File imageFile,
     List<Map<String, double>> coordinates,
   );
@@ -28,7 +29,7 @@ class ManageServiceImpl extends BaseApi implements ManageService {
   }
 
   @override
-  Future<List<SampleDto>> manageCreate(
+  Future<List<SampleDto>> manageCreate(String label,
     File imageFile,
     List<Map<String, double>> coordinates,
   ) async {
@@ -42,7 +43,8 @@ class ManageServiceImpl extends BaseApi implements ManageService {
       },
     );
     print('formData: $formData');
-    final response = await dio.post('api/v1/create_sample2', data: formData);
+    final response =
+        await dio.post('api/v1/create_sample?label=$label', data: formData);
 
     if (response.statusCode == 200) {
       List<dynamic> results = response.data['data'];

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:detect_license_plate_app/config/constants/app_constants.dart';
 import 'package:detect_license_plate_app/controller/train_model/train_model_cubit.dart';
 import 'package:detect_license_plate_app/models/model_result_dto.dart';
@@ -26,6 +24,7 @@ class _ManageModelPageState extends State<ManageModelPage> {
   ValueNotifier<bool> isSearch = ValueNotifier<bool>(false);
   List<ModelResultDto> data = [];
   List<ModelResultDto> tmpData = [];
+
   @override
   void initState() {
     trainModelCubit = TrainModelCubit();
@@ -40,6 +39,15 @@ class _ManageModelPageState extends State<ManageModelPage> {
         .where((element) =>
             element.name!.toLowerCase().contains(value.toLowerCase()))
         .toList();
+    isSearch.value = !isSearch.value; // Notify listeners
+  }
+
+  void sortAcc() {
+    isSearch.value == true
+        ? tmpData.sort((a, b) => b.acc!.compareTo(a.acc!))
+        : tmpData.sort((a, b) => a.acc!.compareTo(b.acc!));
+    data = List.from(tmpData);
+    isSearch.value = !isSearch.value; // Notify listeners
   }
 
   @override
@@ -65,6 +73,7 @@ class _ManageModelPageState extends State<ManageModelPage> {
             );
           }, success: (dataRp) {
             data = dataRp;
+
             tmpData = List.from(data);
             return Scaffold(
               appBar: AppBar(
@@ -78,6 +87,14 @@ class _ManageModelPageState extends State<ManageModelPage> {
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
                 ),
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      sortAcc();
+                    },
+                    icon: const Icon(Icons.sort),
+                  ),
+                ],
               ),
               body: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -88,7 +105,6 @@ class _ManageModelPageState extends State<ManageModelPage> {
                     TextFormField(
                       onChanged: (value) {
                         search(value);
-                        isSearch.value = !isSearch.value;
                       },
                       decoration: const InputDecoration(
                         hintText: 'Enter image name',
@@ -263,8 +279,23 @@ class _ManageModelPageState extends State<ManageModelPage> {
             );
           }, error: (e) {
             return Scaffold(
-              body: Center(
-                child: Text(e.toString()),
+              appBar: AppBar(
+                centerTitle: true,
+                iconTheme: const IconThemeData(color: AppColors.white),
+                backgroundColor: AppColors.blueMain,
+                title: const Text(
+                  'Model Manage',
+                  style: TextStyle(
+                      color: AppColors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              body: const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: Center(
+                  child: Text("Something went wrong"),
+                ),
               ),
             );
           });

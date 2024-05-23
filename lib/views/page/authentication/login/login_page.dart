@@ -4,12 +4,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../../config/constants/app_colors.dart';
 import '../../../../config/constants/app_constants.dart';
 import '../../../../config/constants/assets.dart';
+import '../../../../local_service.dart';
 import '../../../../services/firabase_email_pass_service.dart';
 import '../../../common/show_toast.dart';
 import '../../main_page.dart';
@@ -116,6 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                       onPress: () {
                         // sign();
                         _authenticationCubit.signInWithGoogle();
+                        GetIt.instance<LocalService>().setKeyAuth(true);
                       },
                       iconPath: Assets.icGoogle,
                       buttonText: 'Đăng nhập với Google',
@@ -293,20 +296,10 @@ class _LoginPageState extends State<LoginPage> {
             builder: (context) => const MainPage(),
           ),
         );
+        GetIt.instance<LocalService>().setKeyAuth(true);
       } else {
         showToast(message: "Sign in failed");
       }
     }
   }
-}
-
-sign() async {
-  GoogleSignInAccount? googleSignInAccount = await GoogleSignIn().signIn();
-  GoogleSignInAuthentication? googleSignInAuthentication =
-      await googleSignInAccount?.authentication;
-  final credential = GoogleAuthProvider.credential(
-    accessToken: googleSignInAuthentication?.accessToken,
-    idToken: googleSignInAuthentication?.idToken,
-  );
-  await FirebaseAuth.instance.signInWithCredential(credential);
 }

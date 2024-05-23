@@ -8,19 +8,19 @@ import '../models/model_result_dto.dart';
 import 'base_api.dart';
 
 abstract class TrainModelService {
-  Future<List<ModelResultDto>> trainModel(List<String> imageNames);
+  Future<List<ModelResultDto>> trainModel(List<int> listIdSample);
   Future<List<ModelResultDto>> getAllModel();
   Future<List<ModelResultDto>> deleteModel(int id);
 }
 
 class TrainModelServiceImpl extends BaseApi implements TrainModelService {
   @override
-  Future<List<ModelResultDto>> trainModel(List<String> imageNames) async {
+  Future<List<ModelResultDto>> trainModel(List<int> listIdSample) async {
     try {
-      print('Train model with images: $imageNames');
+      print('Train model with images: $listIdSample');
 
       var data = json.encode({
-        "names": imageNames,
+        "listId": listIdSample,
         "token": GetIt.instance.get<LocalService>().getFcmToken(),
       });
 

@@ -23,7 +23,7 @@ class TrainPage extends StatefulWidget {
 class _TrainPageState extends State<TrainPage> {
   late ManageCubit manageCubit;
 
-  ValueNotifier<List<String>> choose = ValueNotifier([]);
+  ValueNotifier<List<int>> choose = ValueNotifier([]);
   ValueNotifier<bool> isCheck = ValueNotifier(false);
   late TrainModelCubit trainModelCubit;
 
@@ -178,19 +178,19 @@ class _TrainPageState extends State<TrainPage> {
                                                           Checkbox(
                                                     value: choose.value
                                                         .contains(
-                                                            data[index].name),
+                                                            data[index].id),
                                                     onChanged: (value) {
                                                       if (choose.value.contains(
-                                                          data[index].name)) {
+                                                          data[index].id)) {
                                                         isCheck.value =
                                                             !isCheck.value;
                                                         choose.value.remove(
-                                                            (data[index].name));
+                                                            (data[index].id));
                                                       } else {
                                                         choose.value.add(
                                                             data[index]
-                                                                .name
-                                                                .toString());
+                                                                .id!
+                                                                .toInt());
                                                         isCheck.value =
                                                             !isCheck.value;
                                                       }
