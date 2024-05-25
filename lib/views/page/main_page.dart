@@ -86,6 +86,7 @@ class _MainPageState extends State<MainPage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: AnimatedBottomNavigationBar.builder(
+        hideAnimationCurve: Curves.easeInOut,
         itemCount: iconList.length,
         backgroundColor: AppColors.white,
         tabBuilder: (index, isActive) {

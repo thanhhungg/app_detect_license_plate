@@ -39,6 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             success: (user) {},
             error: (message) {},
             logOutSuccess: () {
+              GetIt.instance.get<LocalService>().setKeyAuth(false);
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
                   builder: (context) => const LoginPage(),
@@ -56,31 +57,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   Container(
                     height: 120,
                     color: AppColors.blueMain,
+                    child: Column(
+                      children: [
+                        AppConstants.kSpacingItem60,
+                        Row(
+                          children: [
+                            AppConstants.kSpacingItemW64,
+                            AppConstants.kSpacingItemW64,
+                            AppConstants.kSpacingItemW32,
+                            Text(
+                              GetIt.instance
+                                  .get<LocalService>()
+                                  .getUser()
+                                  .toString(),
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   AppConstants.kSpacingItem85,
                   Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
                       children: [
-                        Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  GetIt.instance
-                                      .get<LocalService>()
-                                      .getUser()
-                                      .toString(),
-                                  style: const TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
                         AppConstants.kSpacingItem85,
                         Container(
                           decoration: BoxDecoration(
@@ -185,9 +190,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           onPressed: () {
                             _authenticationCubit.logout();
-                            GetIt.instance
-                                .get<LocalService>()
-                                .setKeyAuth(false);
                           },
                           child: const Row(
                             children: [
@@ -213,11 +215,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ],
               ),
               Positioned(
-                top: 50,
-                left: MediaQuery.of(context).size.width / 2 - 60,
+                top: 60,
+                left: MediaQuery.of(context).size.width / 9,
                 child: Container(
-                  width: 120,
-                  height: 120,
+                  width: 100,
+                  height: 100,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: NetworkImage(GetIt.instance
@@ -236,7 +238,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ],
                     border: Border.all(
-                      color: AppColors.blueMain,
+                      color: AppColors.white,
                       width: 2,
                     ),
                   ),

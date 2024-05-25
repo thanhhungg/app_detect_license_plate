@@ -16,6 +16,7 @@ class Application extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
+          themeMode: ThemeMode.dark,
           debugShowCheckedModeBanner: false,
           home: GetIt.instance.get<LocalService>().getKeyAuth() == false
               ? const LoginPage()

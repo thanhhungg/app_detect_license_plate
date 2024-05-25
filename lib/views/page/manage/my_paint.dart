@@ -83,7 +83,7 @@ class _MyPainterState extends State<MyPainter> {
             },
             success: (data) {
               Navigator.pop(context);
-              Navigator.pop(context);
+              Navigator.pop(context, data);
             },
             error: (e) {},
           );
@@ -101,6 +101,14 @@ class _MyPainterState extends State<MyPainter> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            actions: [
+              IconButton(
+                onPressed: () {
+                  _pickImage();
+                },
+                icon: const Icon(Icons.image_outlined),
+              ),
+            ],
           ),
           body: Column(
             children: [
@@ -183,23 +191,18 @@ class _MyPainterState extends State<MyPainter> {
                 child: Column(
                   children: [
                     AppConstants.kSpacingItem16,
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          left: 64.0, right: 64.0, top: 16.0),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AppColors.blueMain,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          minimumSize: const Size(double.infinity, 50),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              rectangles.clear();
+                            });
+                          },
+                          icon: Icon(Icons.edit),
                         ),
-                        onPressed: _pickImage,
-                        child: const Text(
-                          'Pick an image',
-                          style: TextStyle(color: AppColors.white),
-                        ),
-                      ),
+                      ],
                     ),
                     Expanded(
                       child: ListView.builder(
@@ -254,11 +257,34 @@ class _MyPainterState extends State<MyPainter> {
                       });
                     }
                     print(coordinates);
-                    manageCubit.manageCreate(
-                      rectangles[0]['label'],
-                      File(image!.path),
-                      coordinates,
-                    );
+                    if (widget.dataSample != null) {
+                      if (image != null) {
+                        print('update');
+                        manageCubit.manageUpdate(
+                          widget.dataSample!.id!,
+                          rectangles[0]['label'],
+                          '',
+                          File(image!.path),
+                          coordinates,
+                        );
+                      } else {
+                        print('update2');
+                        manageCubit.manageUpdate(
+                          widget.dataSample!.id!,
+                          rectangles[0]['label'],
+                          widget.dataSample!.imagePath!,
+                          null,
+                          coordinates,
+                        );
+                      }
+                    } else {
+                      print('update3');
+                      manageCubit.manageCreate(
+                        rectangles[0]['label'],
+                        File(image!.path),
+                        coordinates,
+                      );
+                    }
                   },
                   child: const Text(
                     'Submit',

@@ -31,7 +31,7 @@ class AppColors {
   static const grayLoading = Color(0xFF434657);
   static const grayD6 = Color(0xFFBCBFD6);
   static const blue = Color(0xFF26B8D3);
-  static const blueMain = Color(0xFF3A52D0);
+  static const blueMain = Color(0xFF171C2F);
   static const yellow = Color(0xFFFFC709);
   static const pink = Color(0xFFE0539F);
   static const pink2 = Color(0xFFFF4E92);

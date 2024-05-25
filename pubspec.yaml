@@ -69,6 +69,9 @@ dependencies:
   device_info_plus: ^10.1.0
   permission_handler: ^11.3.1
   collection: ^1.18.0
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.0
+
 
 dev_dependencies:
   flutter_test:
@@ -81,7 +84,21 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
   build_runner: ^2.4.9
+  # Config icon application
+flutter_launcher_icons:
+  android: true
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/images/ic_launcher.png"
+flutter_native_splash:
+  color: "#1C1C1C"
+  android: true
+  ios: true
+  image: assets/images/ic_launcher.png
 
+  android_12:
+    image: assets/images/ic_launcher.png
+    color: "#1C1C1C"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 

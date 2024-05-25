@@ -19,6 +19,7 @@ class FirebaseService {
       GetIt.instance.get<LocalService>().setFcmToken(fCMtoken);
     }
     FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
+
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       print('A new onMessageOpenedApp event was published!');
     });

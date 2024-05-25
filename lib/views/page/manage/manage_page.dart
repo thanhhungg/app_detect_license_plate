@@ -38,13 +38,18 @@ class _ManagePageState extends State<ManagePage> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(100),
           ),
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async {
+            final result = await Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => const MyPainter(),
               ),
             );
+            if (result != null) {
+              setState(() {
+                manageCubit.getManageListSample();
+              });
+            }
           },
           backgroundColor: AppColors.blueMain,
           child: const Icon(Icons.add, color: AppColors.white),
@@ -78,8 +83,8 @@ class _ManagePageState extends State<ManagePage> {
                                 itemCount: data.length,
                                 itemBuilder: (context, index) {
                                   return InkWell(
-                                    onTap: () {
-                                      Navigator.push(
+                                    onTap: () async {
+                                      final result = await Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => MyPainter(
@@ -87,6 +92,11 @@ class _ManagePageState extends State<ManagePage> {
                                           ),
                                         ),
                                       );
+                                      if (result != null) {
+                                        setState(() {
+                                          manageCubit.getManageListSample();
+                                        });
+                                      }
                                     },
                                     child: Column(
                                       children: [

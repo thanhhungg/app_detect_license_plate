@@ -47,4 +47,21 @@ class ManageCubit extends Cubit<ManageState> {
       emit(ManageState.error(e));
     }
   }
+
+  Future manageUpdate(
+    int id,
+    String label,
+    String? imagePath,
+    File? imageFile,
+    List<Map<String, double>> coordinates,
+  ) async {
+    emit(const ManageState.loading());
+    try {
+      final data = await manageService.manageUpdate(
+          id, label, imagePath, imageFile, coordinates);
+      emit(ManageState.success(data));
+    } catch (e) {
+      emit(ManageState.error(e));
+    }
+  }
 }

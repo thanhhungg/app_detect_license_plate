@@ -89,6 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                 // );
               },
               success: (data) {
+                GetIt.instance<LocalService>().setKeyAuth(true);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -118,7 +119,6 @@ class _LoginPageState extends State<LoginPage> {
                       onPress: () {
                         // sign();
                         _authenticationCubit.signInWithGoogle();
-                        GetIt.instance<LocalService>().setKeyAuth(true);
                       },
                       iconPath: Assets.icGoogle,
                       buttonText: 'Đăng nhập với Google',
