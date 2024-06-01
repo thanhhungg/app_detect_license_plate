@@ -71,6 +71,8 @@ dependencies:
   collection: ^1.18.0
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.4.0
+  web_socket_channel: ^2.4.5
+  intl: ^0.17.0
 
 
 dev_dependencies:

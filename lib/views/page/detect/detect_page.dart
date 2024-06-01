@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:camera/camera.dart';
 import 'package:detect_license_plate_app/config/constants/app_constants.dart';
 import 'package:detect_license_plate_app/controller/detect/detect_cubit.dart';
 import 'package:detect_license_plate_app/views/common/common_button.dart';
@@ -14,6 +15,7 @@ import 'package:video_player/video_player.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../config/constants/app_colors.dart';
 import '../../../models/model_result_dto.dart';
+import 'detect_realtime.dart';
 
 class DetectPage extends StatefulWidget {
   const DetectPage({super.key});
@@ -30,6 +32,7 @@ class _DetectPageState extends State<DetectPage> {
   late DetectCubit detectCubit;
   late List<ModelResultDto> models = [];
   late ModelResultDto selectedValue = ModelResultDto(name: 'Select model');
+  late List<CameraDescription> cameras;
   @override
   void initState() {
     _controller = VideoPlayerController.file(File(pickedFiles.path))
@@ -110,6 +113,25 @@ class _DetectPageState extends State<DetectPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            actions: [
+              IconButton(
+                onPressed: () async {
+                  cameras = await availableCameras();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return DetectRealtime(cameras: cameras);
+                      },
+                    ),
+                  );
+                },
+                icon: const Icon(
+                  Icons.camera_alt_outlined,
+                  color: AppColors.white,
+                ),
+              ),
+            ],
           ),
           body: Column(
             children: [
@@ -281,7 +303,7 @@ class _DetectPageState extends State<DetectPage> {
                           'Acc: ${item.acc}',
                           style: TextStyle(
                             fontSize: 12,
-                            color: item.acc!.toInt() < 50
+                            color: item.acc!.toDouble() < 0.8
                                 ? Colors.red
                                 : Colors.green,
                           ),

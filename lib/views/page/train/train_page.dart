@@ -161,7 +161,7 @@ class _TrainPageState extends State<TrainPage> {
                                                               FontWeight.bold),
                                                     ),
                                                     Text(
-                                                      "Number of License Plate: ${data[index].licensePlate!.length.toString()} ",
+                                                      "Quantity: ${data[index].licensePlate!.length.toString()} ",
                                                       style: const TextStyle(
                                                         color:
                                                             AppColors.blueMain,
@@ -245,7 +245,7 @@ class _TrainPageState extends State<TrainPage> {
                                                                         12),
                                                               ),
                                                               AppConstants
-                                                                  .kSpacingItemW16,
+                                                                  .kSpacingItemW8,
                                                               Text(
                                                                 "yMin: ${data[index].licensePlate![subIndex].yMin.toString()}",
                                                                 style: const TextStyle(
@@ -270,7 +270,7 @@ class _TrainPageState extends State<TrainPage> {
                                                                         12),
                                                               ),
                                                               AppConstants
-                                                                  .kSpacingItemW16,
+                                                                  .kSpacingItemW8,
                                                               Text(
                                                                 "yMax: ${data[index].licensePlate![subIndex].yMax.toString()}",
                                                                 style: const TextStyle(

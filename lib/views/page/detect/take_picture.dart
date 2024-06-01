@@ -124,7 +124,7 @@ class _ShowTakePictureState extends State<ShowTakePicture> {
                     TextButton(
                       onPressed: () {
                         detectCubit.detectImage(
-                            File(widget.imageFile.path), 'modelbesst');
+                            File(widget.imageFile.path), 'Model_best');
                       },
                       child: const Text(
                         'Detect',

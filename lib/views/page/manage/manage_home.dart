@@ -29,52 +29,52 @@ class _ManageHomeState extends State<ManageHome> {
 
   @override
   void initState() {
-    BannerAd(
-      adUnitId: AdHelper.bannerAdUnitId,
-      request: const AdRequest(),
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        onAdLoaded: (ad) {
-          setState(() {
-            _bannerAd = ad as BannerAd;
-          });
-        },
-        onAdFailedToLoad: (ad, err) {
-          debugPrint('Failed to load a banner ad: ${err.message}');
-          ad.dispose();
-        },
-      ),
-    ).load();
+    // BannerAd(
+    //   adUnitId: AdHelper.bannerAdUnitId,
+    //   request: const AdRequest(),
+    //   size: AdSize.banner,
+    //   listener: BannerAdListener(
+    //     onAdLoaded: (ad) {
+    //       setState(() {
+    //         _bannerAd = ad as BannerAd;
+    //       });
+    //     },
+    //     onAdFailedToLoad: (ad, err) {
+    //       debugPrint('Failed to load a banner ad: ${err.message}');
+    //       ad.dispose();
+    //     },
+    //   ),
+    // ).load();
 
-    _loadInterstitialAd();
+    // _loadInterstitialAd();
     super.initState();
   }
 
   void _moveToHome() {}
 
-  void _loadInterstitialAd() {
-    InterstitialAd.load(
-      adUnitId: AdHelper.interstitialAdUnitId,
-      request: const AdRequest(),
-      adLoadCallback: InterstitialAdLoadCallback(
-        onAdLoaded: (ad) {
-          print('Load Success');
-          ad.fullScreenContentCallback = FullScreenContentCallback(
-            onAdDismissedFullScreenContent: (ad) {
-              _moveToHome();
-            },
-          );
-
-          setState(() {
-            _interstitialAd = ad;
-          });
-        },
-        onAdFailedToLoad: (err) {
-          print('Load Failed to load an interstitial ad: ${err.message}');
-        },
-      ),
-    );
-  }
+  // void _loadInterstitialAd() {
+  //   InterstitialAd.load(
+  //     adUnitId: AdHelper.interstitialAdUnitId,
+  //     request: const AdRequest(),
+  //     adLoadCallback: InterstitialAdLoadCallback(
+  //       onAdLoaded: (ad) {
+  //         print('Load Success');
+  //         ad.fullScreenContentCallback = FullScreenContentCallback(
+  //           onAdDismissedFullScreenContent: (ad) {
+  //             _moveToHome();
+  //           },
+  //         );
+  //
+  //         setState(() {
+  //           _interstitialAd = ad;
+  //         });
+  //       },
+  //       onAdFailedToLoad: (err) {
+  //         print('Load Failed to load an interstitial ad: ${err.message}');
+  //       },
+  //     ),
+  //   );
+  // }
 
   @override
   void dispose() {
@@ -161,25 +161,23 @@ class _ManageHomeState extends State<ManageHome> {
                 ),
               ),
               AppConstants.kSpacingItem32,
-              InkWell(
-                  onTap: () {
-                    if (_interstitialAd != null) {
-                      _interstitialAd?.show();
-                    } else {
-                      _moveToHome();
-                    }
-                  },
-                  child: Text('Show Interstitial Ad')),
-
-              /// TODO show Admob with banner
-              if (_bannerAd != null)
-                Center(
-                  child: SizedBox(
-                    width: _bannerAd!.size.width.toDouble(),
-                    height: _bannerAd!.size.height.toDouble(),
-                    child: AdWidget(ad: _bannerAd!),
-                  ),
-                ),
+              // InkWell(
+              //   onTap: () {
+              //     if (_interstitialAd != null) {
+              //       _interstitialAd?.show();
+              //     } else {
+              //       _moveToHome();
+              //     }
+              //   },
+              //   child: Text('Show Interstitial Ad'),
+              // ),
+              // Center(
+              //   child: SizedBox(
+              //     width: _bannerAd!.size.width.toDouble(),
+              //     height: _bannerAd!.size.height.toDouble(),
+              //     child: AdWidget(ad: _bannerAd!),
+              //   ),
+              // ),
             ],
           ),
         ));

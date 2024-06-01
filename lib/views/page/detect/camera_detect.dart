@@ -92,7 +92,7 @@ class _CameraDetectPageState extends State<CameraDetectPage> {
                       size: 32,
                     ),
                   ),
-                  AppConstants.kSpacingItemW32,
+                  AppConstants.kSpacingItemW8,
                   IconButton(
                     onPressed: () {
                       controller.takePicture().then((value) {

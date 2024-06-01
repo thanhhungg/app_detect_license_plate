@@ -187,7 +187,7 @@ class _ManagePageState extends State<ManagePage> {
                                                                       .bold),
                                                         ),
                                                         Text(
-                                                          "Number of License Plate: ${data[index].licensePlate!.length.toString()} ",
+                                                          "Quantity: ${data[index].licensePlate!.length.toString()} ",
                                                           style:
                                                               const TextStyle(
                                                             color: AppColors

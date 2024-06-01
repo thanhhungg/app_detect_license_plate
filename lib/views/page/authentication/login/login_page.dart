@@ -172,10 +172,10 @@ class _LoginPageState extends State<LoginPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        TextButton(
-                          onPressed: () => throw Exception(),
-                          child: const Text("Throw Test Exception"),
-                        ),
+                        // TextButton(
+                        //   onPressed: () => throw Exception(),
+                        //   child: const Text("Throw Test Exception"),
+                        // ),
                         TextButton(
                           onPressed: () {
                             Navigator.push(

@@ -132,7 +132,7 @@ class _ManageModelPageState extends State<ManageModelPage> {
                                       title: Row(
                                         children: [
                                           const Text(
-                                            "Tên model: ",
+                                            "Model: ",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
@@ -153,7 +153,7 @@ class _ManageModelPageState extends State<ManageModelPage> {
                                                 data[index].acc.toString(),
                                                 style: TextStyle(
                                                     color:
-                                                        data[index].acc! > 0.8
+                                                        data[index].acc! > 0.7
                                                             ? Colors.green
                                                             : Colors.red),
                                               ),
@@ -171,7 +171,7 @@ class _ManageModelPageState extends State<ManageModelPage> {
                                                 data[index].pre.toString(),
                                                 style: TextStyle(
                                                     color:
-                                                        data[index].pre! > 0.8
+                                                        data[index].pre! > 0.7
                                                             ? Colors.green
                                                             : Colors.red),
                                               ),
@@ -190,7 +190,7 @@ class _ManageModelPageState extends State<ManageModelPage> {
                                                 style: TextStyle(
                                                     color:
                                                         data[index].f1score! >
-                                                                0.8
+                                                                0.7
                                                             ? Colors.green
                                                             : Colors.red),
                                               ),
